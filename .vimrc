@@ -32,8 +32,10 @@ Plug 'mbbill/undotree'
 Plug 'morhetz/gruvbox'
 Plug 'valloric/youcompleteme'
 Plug 'preservim/nerdtree'
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
+Plug 'xavierd/clang_complete'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
 Plug 'pangloss/vim-javascript'
@@ -42,14 +44,9 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'mxw/vim-jsx'
 Plug 'dense-analysis/ale'
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 call plug#end()
-
-
-
 
 colorscheme gruvbox
 set background=dark
@@ -83,14 +80,41 @@ let g:user_emmet_settings = {
     \  },
   \}
 
+ " path to directory where library can be found
+ let g:clang_library_path='/usr/lib/llvm-3.8/lib'
+ " or path directly to the library file
+ let g:clang_library_path='/usr/lib64/libclang.so.3.8'
 
 
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
-nnoremap <C-p> :Files <Cr>
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+"Plugin FZF
+command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
+nnoremap <silent> <Leader>/ :BLines<CR>
+nnoremap <silent> <Leader>' :Marks<CR>
+nnoremap <silent> <Leader>g :Commits<CR>
+nnoremap <silent> <Leader>H :Helptags<CR>
+nnoremap <silent> <Leader>hh :History<CR>
+nnoremap <silent> <Leader>h: :History:<CR>
+nnoremap <silent> <Leader>h/ :History/<CR> 
+
+
+
+
+
+
+
+
+
 
 
 
