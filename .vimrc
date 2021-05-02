@@ -42,10 +42,14 @@ Plug 'pangloss/vim-javascript'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'terryma/vim-multiple-cursors'
 Plug 'mxw/vim-jsx'
 Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'ap/vim-css-color'
+Plug 'SirVer/ultisnips'
+Plug 'mlaursen/vim-react-snippets'
 call plug#end()
 
 colorscheme gruvbox
@@ -54,7 +58,7 @@ highlight Comment cterm=italic gui=italic
 
 
 
-let mapleader=","
+let mapleader="\<Space>"
 " Custom NerdTree
 nmap <leader>ne  :NERDTree<cr>
 nmap <leader>tg  :NERDTreeToggle<cr>
@@ -108,16 +112,16 @@ nnoremap <silent> <Leader>h: :History:<CR>
 nnoremap <silent> <Leader>h/ :History/<CR> 
 
 
+" Multicursor
+" Default highlighting (see help :highlight and help :highlight-link)
+highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+highlight link multiple_cursors_visual Visual
 
 
 
 
 
-
-
-
-
-
+let user_emmet_expandabbr_key = '<c-e>'
 
 
 " run code
