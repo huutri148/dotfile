@@ -48,6 +48,7 @@ Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ap/vim-css-color'
+Plug 'neoclide/coc.nvim', {'branch':'release'}
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
 call plug#end()
@@ -56,13 +57,20 @@ colorscheme gruvbox
 set background=dark
 highlight Comment cterm=italic gui=italic        
 
+" Move between split screen
+nnoremap <C-Down> <C-W>j
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Right> <C-W>l
+nnoremap <C-Left> <C-W>h
+
+
 
 
 let mapleader="\<Space>"
 " Custom NerdTree
 nmap <leader>ne  :NERDTree<cr>
 nmap <leader>tg  :NERDTreeToggle<cr>
-nmap <leader>to :NERDTreeFocus<cr>
+nmap <leader>nf :NERDTreeFocus<cr>
 
 "Custom vim
 nmap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30 <cr>
@@ -71,6 +79,27 @@ nmap <leader>- :vertical resize -5 <cr>
 
 "Custom Prettier
 nmap <leader>py  :Prettier<cr>
+
+"Coc
+nmap <leader>gd <Plug>(coc-definition) 
+nmap <leader>gr <Plug>(coc-references) 
+nnoremap <C-p> :GFiles<cr>
+
+
+
+"Split screen
+nmap <leader>s   :split<CR>
+nmap <leader>v   :vsplit<CR>
+nmap <leader>sx<left>   :leftabove  vsplit<CR>
+nmap <leader>sx<right>  :rightbelow vsplit<CR>
+nmap <leader>sx<up>     :leftabove  split<CR>
+nmap <leader>sx<down>   :rightbelow split<CR>
+
+"Tab
+nmap <leader>tn   :tabnew<CR>
+nmap <leader>to  :tabonly<CR>
+nmap <leader>tc   :tabclose<CR>
+
 
 
 " open vimrc in vertical split
