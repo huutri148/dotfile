@@ -58,10 +58,10 @@ set background=dark
 highlight Comment cterm=italic gui=italic        
 
 " Move between split screen
-nnoremap <C-Down> <C-W>j
-nnoremap <C-Up> <C-W>k
-nnoremap <C-Right> <C-W>l
-nnoremap <C-Left> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+nnoremap <C-h> <C-W>h
 
 
 
