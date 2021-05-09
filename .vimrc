@@ -23,6 +23,7 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-surround'
 Plug 'ryanoasis/vim-devicons'                                                   
 Plug 'vim-airline/vim-airline'                                                  
 Plug 'vim-airline/vim-airline-themes'                                           
@@ -201,3 +202,7 @@ augroup compileandrun
     autocmd filetype cpp nnoremap <f6> :vnew <bar> :te "a.exe" <cr>
     autocmd filetype c nnoremap <f5> :w <bar> !make %:r && ./%:r <cr>
 augroup END
+
+
+
+
