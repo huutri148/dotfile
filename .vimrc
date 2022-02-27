@@ -23,7 +23,10 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'mileszs/ack.vim'
 Plug 'ryanoasis/vim-devicons'                                                   
 Plug 'vim-airline/vim-airline'                                                  
 Plug 'vim-airline/vim-airline-themes'                                           
@@ -31,14 +34,17 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'sheerun/vim-polyglot'            
 Plug 'mbbill/undotree'
 Plug 'morhetz/gruvbox'
-Plug 'valloric/youcompleteme'
 Plug 'preservim/nerdtree'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
 Plug 'xavierd/clang_complete'
 Plug 'jiangmiao/auto-pairs'
 Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
@@ -50,8 +56,50 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ap/vim-css-color'
 Plug 'neoclide/coc.nvim', {'branch':'release'}
+Plug 'neoclide/coc-tsserver',{'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
+Plug 'iamcco/coc-angular', {'do': 'yarn install --frozen-lockfile && yarn build'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+
+
+
+" Syntax hightlight for .js
+Plug 'pangloss/vim-javascript'
+" Syntax highlight for .tsx
+Plug 'ianks/vim-tsx', { 'for': 'typescript.tsx' }
+" Syntax highlight for .ts
+Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+" css3 syntax highlight
+Plug 'hail2u/vim-css3-syntax'
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+
 Plug 'SirVer/ultisnips'
 Plug 'mlaursen/vim-react-snippets'
+
+" commenting text
+Plug 'tpope/vim-commentary'
+
+" Smart replace, abbreviations, convert case
+Plug 'tpope/vim-abolish'
+
+" Multifile replace
+Plug 'wincent/ferret'
+
+" Show list of merge conflicts
+Plug 'wincent/vcs-jump'
+" Highlink yank for a second
+Plug 'machakann/vim-highlightedyank'
+
+
+
+
+
+"Plug 'nvim-lua/plenary.nvim'
+"Plug 'nvim-lua/popup.nvim'
+"Plug 'nvim-telescope/telescope.nvim'
+"Plug 'nvim-telescope/telescope-fzf-native.nvim'
 call plug#end()
 
 colorscheme gruvbox
@@ -107,6 +155,7 @@ nmap <leader>tc   :tabclose<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 " update changes into current buffer
 nnoremap <leader>sv :source $MYVIMRC<cr>  
+" EMMET 
 let g:user_emmet_leader_key='<Tab>'
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
@@ -127,11 +176,12 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
+nmap <Leader>gu <Plug>(VcsJump)
 
 "Plugin FZF
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 nnoremap <silent> <Leader>b :Buffers<CR>
-nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <C-f> :GFiles<CR>
 nnoremap <silent> <Leader>f :Rg<CR>
 nnoremap <silent> <Leader>/ :BLines<CR>
 nnoremap <silent> <Leader>' :Marks<CR>
@@ -141,6 +191,10 @@ nnoremap <silent> <Leader>hh :History<CR>
 nnoremap <silent> <Leader>h: :History:<CR>
 nnoremap <silent> <Leader>h/ :History/<CR> 
 
+"Snippet
+let g:UltiSnipsExpandTrigger="<tab>"
+" list all snippets for current filetype
+let g:UltiSnipsListSnippets="<c-l>"
 
 " Multicursor
 " Default highlighting (see help :highlight and help :highlight-link)
@@ -202,6 +256,12 @@ augroup compileandrun
     autocmd filetype cpp nnoremap <f6> :vnew <bar> :te "a.exe" <cr>
     autocmd filetype c nnoremap <f5> :w <bar> !make %:r && ./%:r <cr>
 augroup END
+
+
+
+
+" The silver search
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 
 
